@@ -97,6 +97,8 @@ console.log(now - 1991 > now - 2018);
 // const avarageAge = (46 + 19) / 2;
 // console.log(46, 19, avarageAge);
 
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 // Coding Challenge #1
 // Mark and John are trying to compare their BMI (Body Mass Index), which is
 // calculated using the formula:
@@ -120,14 +122,35 @@ console.log(now - 1991 > now - 2018);
 
 // GOOD LUCK �
 
-const markHeight = 1.88,
-  markMass = 95,
-  johnHeight = 1.76,
-  johnMass = 85;
+// const markHeight = 1.88,
+//   markMass = 95,
+//   johnHeight = 1.76,
+//   johnMass = 85;
 
-const markBMI = markMass / markHeight ** 2,
-  johnBMI = johnMass / johnHeight ** 2;
+// const markBMI = markMass / markHeight ** 2,
+//   johnBMI = johnMass / johnHeight ** 2;
 
-const markHigherBMI = markBMI > johnBMI;
+// const markHigherBMI = markBMI > johnBMI;
 
-console.log(markBMI, johnBMI, markHigherBMI);
+// console.log(markBMI, johnBMI, markHigherBMI);
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+const firstName = "Caique";
+const job = "programmer";
+const birthYear = 2001;
+const currentYear = 2022;
+
+const caique =
+  "I'm " + firstName + ", a " + (currentYear - birthYear) + " years old " + job;
+
+const caiqueNew = `I'm ${firstName} a ${
+  currentYear - birthYear
+} years old ${job}`;
+console.log(caiqueNew);
+
+console.log(`Just a regular string...`);
+
+console.log(`String with
+multiple
+lines`);
