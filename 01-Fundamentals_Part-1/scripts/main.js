@@ -48,3 +48,16 @@
 // year = 1991;
 // console.log(year);
 // console.log(typeof null);
+
+let agr = 30;
+age = 31;
+
+const birthYear = 1991;
+// birthYear = 1990;
+// const job;
+
+var job = "Programmer";
+job = "teacher";
+
+lastName = "Sobral";
+console.log(lastName);
