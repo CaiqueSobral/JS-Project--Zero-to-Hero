@@ -1,10 +1,10 @@
-let country = "Brazil";
-let continent = "South America";
-let population = "200.4 million";
+// let country = "Brazil";
+// let continent = "South America";
+// let population = "200.4 million";
 
-console.log(
-  `${country} is in ${continent} and has o population of ${population}`
-);
+// console.log(
+//   `${country} is in ${continent} and has o population of ${population}`
+// );
 
 // let js = "amazing";
 // console.log(40 + 8 + 23 - 10);
@@ -30,3 +30,21 @@ console.log(
 // let job1 = "Programmer";
 // let job2 = "Teacher";
 // console.log(myFirstJob);
+
+// let javascriptIsFun = true;
+// console.log(typeof javascriptIsFun);
+
+// console.log(typeof true);
+// console.log(typeof 23);
+// console.log(typeof "Jonas");
+
+// javascriptIsFun = "Yes";
+// console.log(typeof javascriptIsFun);
+
+// let year;
+// console.log(year);
+// console.log(typeof year);
+
+// year = 1991;
+// console.log(year);
+// console.log(typeof null);
