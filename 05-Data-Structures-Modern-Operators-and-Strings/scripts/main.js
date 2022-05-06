@@ -47,3 +47,5 @@ const restaurant = {
     console.log(mainIngredient, otherIngridients);
   },
 };
+
+
