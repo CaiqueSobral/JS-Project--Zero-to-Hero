@@ -90,6 +90,14 @@ const createUserName = function (accs) {
       .join('');
   });
 };
-
 createUserName(accounts);
-console.log(accounts);
+
+const deposits = account1.movements.filter(function (mov) {
+  return mov > 0;
+});
+
+const withdrawals = account1.movements.filter(function (mov) {
+  return mov < 0;
+});
+console.log(withdrawals);
+console.log(deposits);
