@@ -72,12 +72,13 @@ const displayMovements = function (movements) {
       i + 1
     } ${movType}</div>
     <div class="movements__date">3 days ago</div>
-    <div class="movements__value">${mov}</div>
+    <div class="movements__value">${mov} €</div>
   </div>`;
 
     containerMovements.insertAdjacentHTML('afterbegin', htmlString);
   });
 };
+displayMovements(account1.movements);
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce(function (acc, cur) {
@@ -86,6 +87,7 @@ const calcDisplayBalance = function (movements) {
 
   labelBalance.textContent = `${balance} €`;
 };
+calcDisplayBalance(account1.movements);
 
 const createUserName = function (accs) {
   accs.forEach(function (acc) {
@@ -96,15 +98,30 @@ const createUserName = function (accs) {
       .join('');
   });
 };
-
-displayMovements(account1.movements);
-calcDisplayBalance(account1.movements);
 createUserName(accounts);
 
-const deposits = account1.movements.filter(function (mov) {
-  return mov > 0;
-});
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes} €`;
 
-const withdrawals = account1.movements.filter(function (mov) {
-  return mov < 0;
-});
+  const outcomes = movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(outcomes)} €`;
+
+  const interest = movements
+    .filter((mov) => mov > 0)
+    .map((deposit) => deposit * (1.2 / 100))
+    .filter((int) => int >= 1)
+    .reduce((acc, cur) => acc + cur, 0);
+  labelSumInterest.textContent = `${interest} €`;
+};
+calcDisplaySummary(account1.movements);
+
+const findMethod = account1.movements.find((mov) => mov < 0);
+console.log(findMethod);
+
+const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
+console.log(account);
