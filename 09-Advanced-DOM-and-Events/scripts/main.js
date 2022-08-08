@@ -30,19 +30,19 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+//==========================================================
+//==========================================================
+
 ////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
+//////////////////  SCROLLING ANIMATION  ///////////////////
 ////////////////////////////////////////////////////////////
 
-const header = document.querySelector('.header');
-const message = document.createElement('div');
-message.classList.add('cookie-message');
-message.innerHTML =
-  'We use cookies for improved funcionality and analytics. <button class="btn btn--close-cookie"> Got it! </button>';
-header.append(message);
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
-document
-  .querySelector('.btn--close-cookie')
-  .addEventListener('click', function () {
-    message.remove(); // remove the element
-  });
+btnScrollTo.addEventListener('click', function () {
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+//==========================================================
+//==========================================================
