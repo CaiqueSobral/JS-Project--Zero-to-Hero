@@ -84,6 +84,30 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    labelTimer.textContent = `${min}:${sec}`;
+
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+
+    time--;
+  };
+
+  let time = 120;
+
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  return timer;
+};
+
 const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
@@ -152,7 +176,7 @@ const createUserName = function (accs) {
 };
 createUserName(accounts);
 
-let currentAccount;
+let currentAccount, timer;
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -171,7 +195,6 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginPin.value = inputLoginUsername.value = '';
     inputLoginPin.blur();
 
-    updateUI(currentAccount);
     const now = new Date();
     const options = {
       hour: 'numeric',
@@ -187,6 +210,11 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.locale,
       options
     ).format(now);
+
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+
+    updateUI(currentAccount);
   }
 });
 
@@ -234,6 +262,9 @@ btnTransfer.addEventListener('click', function (e) {
     receiverAcc.movementsDates.push(new Date().toISOString());
 
     updateUI(currentAccount);
+
+    clearInterval(timer);
+    startLogOutTimer();
   }
 });
 
@@ -271,6 +302,9 @@ btnLoan.addEventListener('click', function (e) {
 
       // Update UI
       updateUI(currentAccount);
+
+      clearInterval(timer);
+      startLogOutTimer();
     }, 2500);
   }
 
@@ -282,23 +316,3 @@ btnSort.addEventListener('click', function (e) {
   sorted = !sorted;
   displayMovements(currentAccount, sorted);
 });
-
-// FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
-
-const now = new Date();
-const options = {
-  hour: 'numeric',
-  minute: 'numeric',
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-};
-
-const locale = navigator.language;
-
-labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(now);
-
-
