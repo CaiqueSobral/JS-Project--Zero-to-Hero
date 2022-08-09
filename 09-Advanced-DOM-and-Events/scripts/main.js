@@ -5,6 +5,7 @@
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
+const header = document.querySelector('.header');
 const section1 = document.querySelector('#section--1');
 const nav = document.querySelector('.nav');
 
@@ -91,16 +92,21 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 ///////////////////  STICKY NAVIGATION  ////////////////////
 ////////////////////////////////////////////////////////////
 
-const initialCoords = section1.getBoundingClientRect();
-console.log(initialCoords);
+const navHeight = nav.getBoundingClientRect().height;
 
-window.addEventListener('scroll', function () {
-  if (window.scrollY > initialCoords.top) {
-    nav.classList.add('sticky');
-  } else {
-    nav.classList.remove('sticky');
-  }
+const stickyNav = function (entries) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
 });
+headerObserver.observe(header);
 
 //==========================================================
 //==========================================================
