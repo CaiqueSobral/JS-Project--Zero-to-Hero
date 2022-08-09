@@ -6,6 +6,7 @@
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const header = document.querySelector('.header');
+const sections = document.querySelectorAll('.section');
 const section1 = document.querySelector('#section--1');
 const nav = document.querySelector('.nav');
 
@@ -68,7 +69,7 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 //==========================================================
 
 ////////////////////////////////////////////////////////////
-//////////////////  SCROLLING ANIMATION  ///////////////////
+///////////////////  SMOOTH SCROLLING  /////////////////////
 ////////////////////////////////////////////////////////////
 
 btnScrollTo.addEventListener('click', function () {
@@ -83,6 +84,32 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     const id = e.target.getAttribute('href');
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
+});
+
+//==========================================================
+//==========================================================
+
+////////////////////////////////////////////////////////////
+//////////////////  SCROLLING ANIMATION  ///////////////////
+////////////////////////////////////////////////////////////
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+sections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
 });
 
 //==========================================================
