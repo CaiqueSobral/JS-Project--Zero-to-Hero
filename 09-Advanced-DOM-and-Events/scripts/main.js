@@ -88,6 +88,24 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 //==========================================================
 
 ////////////////////////////////////////////////////////////
+///////////////////  STICKY NAVIGATION  ////////////////////
+////////////////////////////////////////////////////////////
+
+const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+
+window.addEventListener('scroll', function () {
+  if (window.scrollY > initialCoords.top) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+});
+
+//==========================================================
+//==========================================================
+
+////////////////////////////////////////////////////////////
 ///////////////////  TABBED COMPONENT  /////////////////////
 ////////////////////////////////////////////////////////////
 
