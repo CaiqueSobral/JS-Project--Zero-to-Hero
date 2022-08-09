@@ -16,6 +16,10 @@ const btnScrollTo = document.querySelector('.btn--scroll-to');
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -107,7 +111,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 sections.forEach(function (section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  //section.classList.add('section--hidden');
 });
 
 //==========================================================
@@ -188,6 +192,43 @@ tabsContainer.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+//==========================================================
+//==========================================================
+
+////////////////////////////////////////////////////////////
+///////////////////  SLIDER COMPONENT  /////////////////////
+////////////////////////////////////////////////////////////
+
+let currentSlide = 0;
+const maxSlide = slides.length - 1;
+
+const goToSlide = function (slide) {
+  slides.forEach((s, i) => {
+    s.style.transform = `translateX(${100 * (i - currentSlide)}%)`;
+  });
+};
+
+const nextSlide = function () {
+  if (currentSlide === maxSlide) currentSlide = 0;
+  else currentSlide++;
+
+  goToSlide(currentSlide);
+};
+
+const previousSlide = function () {
+  if (currentSlide === 0) currentSlide = maxSlide;
+  else currentSlide--;
+
+  goToSlide(currentSlide);
+};
+
+// Making the slides side to side
+goToSlide(0);
+
+// Move to next slide
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', previousSlide);
 
 //==========================================================
 //==========================================================
