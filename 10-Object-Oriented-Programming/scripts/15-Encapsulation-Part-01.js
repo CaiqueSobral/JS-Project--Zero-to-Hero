@@ -5,14 +5,12 @@
 ////////////////////////////////////////////////////////////
 
 class Account {
-  #movements;
-  #pin;
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this.#pin = pin;
+    this._pin = pin;
     // Private property
-    this.#movements = [];
+    this._movements = [];
     this.locale = navigator.language;
 
     console.log(`Thanks for opening an account, ${this.owner}`);
@@ -27,12 +25,12 @@ class Account {
     this.deposit(-val);
   }
 
-  #approveLoan(val) {
+  _approveLoan(val) {
     return true;
   }
 
   requestLoan(val) {
-    if (this.#approveLoan(val)) {
+    if (this._approveLoan(val)) {
       this.deposit(val);
       console.log(`Loan approved`);
     }
@@ -41,8 +39,6 @@ class Account {
 
 const acc1 = new Account('Caique', 'EUR', 1111);
 
-//acc1.#movements.push(250);
-// acc1.movements.push(-140);
 acc1.deposit(250);
 acc1.withdraw(140);
 acc1.requestLoan(1000);
