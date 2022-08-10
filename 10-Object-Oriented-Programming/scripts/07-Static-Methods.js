@@ -1,7 +1,7 @@
 'use strict';
 
 ////////////////////////////////////////////////////////////
-////////////////////  OBJECT.CREATE  ///////////////////////
+////////////////////  STATIC METHODS  //////////////////////
 ////////////////////////////////////////////////////////////
 
 class Person {
@@ -10,6 +10,7 @@ class Person {
     this.birthear = birthear;
   }
 
+  // Methods will be added to .prototype
   calcAge() {
     console.log(2022 - this.birthear);
   }
@@ -26,7 +27,19 @@ class Person {
   get fullName() {
     return this._fullName;
   }
+
+  static hey() {
+    console.log('hey');
+    console.log(this);
+  }
 }
+
+// Declarin a static method
+// Person.hey = function () {
+//   console.log('hey');
+// };
+
+Person.hey();
 
 const caique = new Person('Caique Sobral', 2001);
 console.log(caique.fullName);
