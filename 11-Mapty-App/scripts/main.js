@@ -11,6 +11,56 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+////////////////////////////////////////////////////////////
+///////////////////  WORKOUT CLASSES  //////////////////////
+////////////////////////////////////////////////////////////
+
+class Workout {
+  date = new Date();
+  id = (Date.now() + '').slice(-10);
+
+  constructor(coords, distance, duration) {
+    this.coords = coords;
+    this.distance = distance;
+    this.duration = duration;
+  }
+}
+
+class Running extends Workout {
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+    this.pace = this.#calcPace();
+  }
+
+  #calcPace() {
+    this.pace = this.duration / this.distance;
+
+    return this.pace;
+  }
+}
+
+class Cycling extends Workout {
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+    this.speed = this.#calcSpeed;
+  }
+
+  #calcSpeed() {
+    this.speed = this.distance / (this.duration / 60);
+
+    return this.speed;
+  }
+}
+
+//==========================================================
+//==========================================================
+
+////////////////////////////////////////////////////////////
+///////////////////  APP ARCHITECTURE  /////////////////////
+////////////////////////////////////////////////////////////
+
 class App {
   #map;
   #mapEvent;
@@ -34,10 +84,8 @@ class App {
   }
 
   #loadMap(position) {
-    console.log(this);
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    console.log(`https://www.google.com/maps/@${latitude},${longitude},13z`);
     const coords = [latitude, longitude];
     this.#map = L.map('map').setView(coords, 13);
 
@@ -85,5 +133,8 @@ class App {
         '';
   }
 }
+
+//==========================================================
+//==========================================================
 
 const app = new App();
