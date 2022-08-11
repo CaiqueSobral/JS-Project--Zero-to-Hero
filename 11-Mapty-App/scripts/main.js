@@ -87,6 +87,8 @@ class App {
   constructor() {
     this.#getPosition();
 
+    this.#getLocalStorage();
+
     form.addEventListener('submit', this.#newWorkout.bind(this));
 
     inputType.addEventListener('change', this.#toggleElevationField);
@@ -118,6 +120,10 @@ class App {
 
     // Handling clicks on map
     this.#map.on('click', this.#showForm.bind(this));
+
+    this.#workouts.forEach((work) => {
+      this.#renderWorkoutMarker(work);
+    });
   }
 
   #showForm(mapE) {
@@ -191,6 +197,8 @@ class App {
     this.#renderWorkout(workout);
 
     this.#hideForm();
+
+    this.#setLocalStorage();
   }
 
   #renderWorkoutMarker(workout) {
@@ -281,7 +289,22 @@ class App {
     });
 
     // Using the API
-    workout.click();
+    // workout.click();
+  }
+
+  #setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+
+  #getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('workouts'));
+    if (!data) return;
+
+    this.#workouts = data;
+
+    this.#workouts.forEach((work) => {
+      this.#renderWorkout(work);
+    });
   }
 }
 
