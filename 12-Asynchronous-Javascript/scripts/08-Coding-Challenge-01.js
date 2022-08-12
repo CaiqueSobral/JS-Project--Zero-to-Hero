@@ -55,7 +55,7 @@ const renderCountry = function (data, className = '') {
   countriesContainer.insertAdjacentHTML('beforeend', html);
 };
 
-const apiKey = '6fa2d91dc5b9468ebbc33a17de8d4514';
+const apiKey = 'YOUR-API-KEY';
 
 btn.addEventListener('click', function () {
   navigator.geolocation.getCurrentPosition(function (data) {
