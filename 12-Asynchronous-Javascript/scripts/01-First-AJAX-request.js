@@ -5,9 +5,9 @@ const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
 
-const renderCountry = function (data, className = '') {
+const renderCountry = function (data) {
   const html = `
-    <article class="country ${className}">
+    <article class="country">
       <img class="country__img" src="${data.flag}" />
       <div class="country__data">
         <h3 class="country__name">${data.name}</h3>
@@ -25,13 +25,15 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
-const data = fetch('https://restcountries.com/v2/name/brazil');
-console.log(data);
+const getCountry = function (country) {
+  const request = new XMLHttpRequest();
+  request.open('GET', `https://restcountries.com/v2/name/${country}`);
+  request.send();
 
-const getCountryData = function (country) {
-  fetch(`https://restcountries.com/v2/name/${country}`)
-    .then((response) => response.json())
-    .then((data) => renderCountry(data[0]));
+  request.addEventListener('load', function () {
+    const [data] = JSON.parse(this.responseText);
+    renderCountry(data);
+  });
 };
 
-getCountryData('brazil');
+getCountry('germany');
