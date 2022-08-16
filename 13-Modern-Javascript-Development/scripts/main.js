@@ -8,16 +8,16 @@
 // ShoppingCart.addToCart('bread', 5);
 // console.log(ShoppingCart.totalPrice);
 
-// console.log('Importing module');
+console.log('Importing module');
 
-// import add, { cart } from './shoppingCart.js';
-// add('pizza', 2);
-// add('bread', 4);
-// add('olives', 8);
-// add('apples', 5);
-// add('bananas', 1);
+import add, { cart } from './shoppingCart.js';
+add('pizza', 2);
+add('bread', 4);
+add('olives', 8);
+add('apples', 5);
+add('bananas', 1);
 
-// console.log(cart);
+console.log(cart);
 
 // const res = await fetch('https://jsonplaceholder.typicode.com/posts'); // Blocks the execution
 // const data = await res.json();
@@ -39,7 +39,8 @@
 // const lastPost2 = await getLastPost();
 // console.log(lastPost2);
 
-import cloneDeep from '../node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from '../node_modules/lodash-es/cloneDeep.js';
+import cloneDeep from 'lodash-es';
 
 const state = {
   cart: [
@@ -55,3 +56,7 @@ const stateDeepClone = cloneDeep(state);
 state.user.loggedIn = false;
 console.log(stateClone);
 console.log(stateDeepClone);
+
+if (module.hot) {
+  module.hot.accept;
+}
